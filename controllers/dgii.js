@@ -18,13 +18,19 @@ const getCompanyInformationByRNC = async(req, res) => {
 
         }
 
+
         info.rnc = info.rnc.replace(/-/g, "");
+
+        // Set default values to required properties( fields ) returned by DGII
         info.governmentBranch = info.governmentBranch ? info.governmentBranch : "ND";
+        info.status = info.status ? info.status : "ND";
+        info.economicActivity = info.economicActivity ? info.economicActivity : "ND";
 
         return  res.json({
             message:"OK",
             "company": info
          });
+
 
     } catch (error) {
 

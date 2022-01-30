@@ -41,11 +41,13 @@ const getArrayValuesOfHTML = ( HTMLdata ) => {
     if( matches ) {
 
        let arrayValues = matches.map( value => {
+
            let firstSearchTerm = "<td>";
            let secondSearchTerm = "</td>";
            let firstIndex = value.lastIndexOf(firstSearchTerm);
            value = value.substring( firstIndex + firstSearchTerm.length, value.length - secondSearchTerm.length );
-           return value;
+    
+           return decodeHTMLEntities( value );
 
         })
     
@@ -67,6 +69,13 @@ const generateObject = ( props=[], values=[] )=> {
    });
 
    return object;
+}
+
+const decodeHTMLEntities = ( str ) => {
+
+    return str.replace(/&#(\d+);/g, ( match, dec) => {
+        return String.fromCharCode( dec )
+    });
 }
 
 
