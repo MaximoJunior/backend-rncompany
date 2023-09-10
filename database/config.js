@@ -4,7 +4,7 @@ const dbConnection = async () => {
 
     try {
         // Change MONGODB_CNN to DEV_MONGODB_CNN for using a local DB
-        await mongoose.connect( process.env.MONGODB_CNN, {
+        await mongoose.connect(`mongodb://${ process.env.MONGODB_HOST}/RNCompany`, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             // useCreateIndex: true,

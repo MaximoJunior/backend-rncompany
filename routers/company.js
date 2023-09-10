@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { createCompany, getCompanies, updateCompany, deleteCompany } = require('../controllers')
+const { createCompany, getCompanies, updateCompany, deleteCompany, getCompany } = require('../controllers')
 const { check } = require('express-validator');
 const { validateResults } = require('../middlewares/validate_fields');
 
@@ -8,6 +8,11 @@ validateResults(['msg', 'param']);
 const router = Router();
 
 router.get("/", getCompanies );
+
+router.get("/:id",[
+    check("id").isMongoId(),
+    validateResults()
+], getCompany );
 
 router.post("/",[
     check("rnc").trim().not().isEmpty(),

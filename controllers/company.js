@@ -82,6 +82,29 @@ const updateCompany = async (req, res) => {
     
 }
 
+const getCompany = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+
+        const company = await Company.findById( id );
+       
+
+        res.status(200).json({
+            message: "OK",
+            company
+        });
+
+    } catch (error) {
+
+        console.log("Error - updateCompany:", error );
+        res.status(500).json( { message: "Error" } );
+
+    }
+
+    
+}
+
 const deleteCompany = async (req, res) => {
 
     const { id } = req.params;
@@ -111,6 +134,7 @@ const deleteCompany = async (req, res) => {
 
 module.exports = {
     getCompanies,
+    getCompany,
     createCompany,
     updateCompany,
     deleteCompany
